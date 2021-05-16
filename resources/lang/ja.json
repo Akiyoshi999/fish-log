@@ -2,7 +2,10 @@
     "Confirm Password": "パスワード(確認)",
     "E-Mail Address": "メールアドレス",
     "Login": "ログイン",
+    "Logout": "ログアウト",
     "Name": "ユーザー名",
     "Password": "パスワード",
-    "Register": "ユーザー登録"
+    "Register": "ユーザー登録",
+    "Reset Password": "パスワード再設定",
+    "Send Password Reset Link": "メール送信"
 }
