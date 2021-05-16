@@ -11,6 +11,7 @@ npm run watch
 composer require laravel/ui
 php artisan ui bootstrap
 php artisan ui vue --auth
+npm i --save material-design-icons-iconfont @mdi/font vuetify
 
 ### キャッシャクリアコマンド
 
