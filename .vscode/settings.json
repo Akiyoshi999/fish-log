@@ -1,0 +1,7 @@
+{
+    "editor.tabSize": 4,
+    "blade.format.enable": true,
+    "[blade]": {
+        "editor.defaultFormatter": "onecentlin.laravel-blade"
+    }
+}
