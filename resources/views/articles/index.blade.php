@@ -13,14 +13,22 @@
     </div>
   </div>
 
+  @foreach ($articles as $article)
+
   <div class="row mb-2">
     <div class="col-md-12">
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">国際</strong>
-          <h3 class="mb-0">人気のポスト</h3>
-          <div class="mb-1 text-muted">11/12</div>
-          <p class="card-text mb-auto">これは写真の解説文付きのカードです。自然に説明を加えることができます。</p>
+          <i class="fas fa-user-circle">
+            {{$article->user->name}}
+          </i>
+          <h3 class="mb-0">
+            {{$article->title}}
+          </h3>
+          <div class="mb-1 text-muted">
+            {{$article->date}}
+          </div>
+          {{-- <p class="card-text mb-auto">これは写真の解説文付きのカードです。自然に説明を加えることができます。</p> --}}
           <a href="#" class="stretched-link">続きを読む</a>
         </div>
         <div class="col-auto d-none d-lg-block">
@@ -35,6 +43,7 @@
       </div>
     </div>
   </div>
+  @endforeach
 
 </main><!-- /.container -->
 @endsection
