@@ -2,6 +2,10 @@
 
 ## 使用コマンド
 
+### 作成系
+
+artisan make:test UserRegisterTest
+
 ### 起動コマンド
 
 npm run watch
