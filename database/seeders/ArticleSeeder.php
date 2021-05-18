@@ -6,25 +6,17 @@ use App\Models\Article;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ArticleSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        User::factory()
-            ->state([
-                'name' => 'ubuntu',
-                'email' => 'ubuntu@test.com',
-            ])
-            ->create();
-        User::factory(2)->create();
-
+        // Userの数＊２の記事作成
         $users = User::all();
-
         foreach ($users as $user) {
             Article::factory()
                 ->count(2)
