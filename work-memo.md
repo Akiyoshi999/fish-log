@@ -6,6 +6,12 @@
 
 artisan make:test UserRegisterTest
 
+#### database
+
+php artisan make:seeder UserSeeder
+php artisan make:seeder ArticleSeeder
+php artisan mek:factory ArticleFactory --model=Article
+
 ### 起動コマンド
 
 npm run watch
@@ -28,6 +34,7 @@ php artisan view:clear
 
 php artisan migrate
 php artisan make:migration create_articles_table --create=articles
+php artisan
 
 ## 苦戦したこと
 
