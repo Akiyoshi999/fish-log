@@ -27,10 +27,19 @@ php artisan view:clear
 ### DB 系
 
 php artisan migrate
+php artisan make:migration create_articles_table --create=articles
 
 ## 苦戦したこと
 
 ## 参考記事
+
+### テスト系
+
+[Laravel7 でログイン画面を作って PHPUnit で動作確認する
+](https://engineer-lady.com/program_info/create-login-phpunit-laravel7/)
+
+[誰でも簡単! CircleCI で PHPUnit を実行してみよう!!
+](https://qiita.com/KeisukeKudo/items/d058b359361e622dcc6f)
 
 ### Vue
 
