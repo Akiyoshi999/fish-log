@@ -42,7 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // articleテーブルの紐付け
+    /**
+     * articleテーブルの紐付け
+     *
+     * @return HasMany
+     */
     public function articles(): HasMany
     {
         return $this->hasMany('App\Models\Article');

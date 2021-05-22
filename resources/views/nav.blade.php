@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-info mb-4">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Top</a>
+    <a class="navbar-brand" href="{{route('top')}}">Top</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
       aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,6 +12,10 @@
           <button class="btn btn-dark" type="submit">Search</button>
         </form>
     </div>
+    <div>
+      <a class="text-dark" href="{{route('articles.create')}}">記事投稿</a>
+    </div>
+
   </div>
   <!-- Dropdown -->
   <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -20,7 +24,7 @@
       {{ Auth::user() ? Auth::user()->name:"ゲスト" }}
     </i>
   </a>
-  <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+  <div class=" dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
     {{-- ゲストのナビゲーション --}}
     @guest
     <button class="dropdown-item" type="button" onclick="location.href='{{route('login')}}'">
