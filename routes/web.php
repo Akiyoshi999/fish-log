@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
-Route::get('/', [ArticleController::class, 'index']);
+Route::get('/', [ArticleController::class, 'index'])->name('top');
 
+# TODO: 余計なリソース削除
+Route::resource('/articles', ArticleController::class)
+    ->except(['index', 'show'])->middleware('auth');
+Route::resource('/articles', ArticleController::class)->only(['show']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
