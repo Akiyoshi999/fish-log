@@ -56,3 +56,13 @@
   </form>
   <!-- Dropdown -->
 </nav>
+@if (session('success_msg'))
+<div class="alert alert-success" role="alert">
+  {{ session('success_msg') }}
+</div>
+@endif
+@if (session('err_msg'))
+<div class="alert alert-danger" role="alert">
+  {{ session('err_msg') }}
+</div>
+@endif

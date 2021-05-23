@@ -42,6 +42,8 @@ php artisan
 
 ### PHP
 
+[blade で変数の存在確認する方法](https://qiita.com/mikimiki0055/items/24d96c72b5fb5e181297)
+
 [PHP で文字数を制限し、超過分を『…』に置き換えるコード
 ](https://spreadsheep.net/php%E3%81%A7%E6%96%87%E5%AD%97%E6%95%B0%E3%82%92%E5%88%B6%E9%99%90%E3%81%97%E3%80%81%E6%9C%AB%E5%B0%BE%E3%81%AB%E3%80%8E%E3%80%8F%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B%E3%82%B3/)
 

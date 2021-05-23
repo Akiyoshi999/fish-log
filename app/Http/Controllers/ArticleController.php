@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, 'article');
+    }
+
     /**
      * 投稿記事を全て表示する
      *
@@ -40,7 +45,7 @@ class ArticleController extends Controller
      * 釣果記録の登録処理
      *
      * @param ArticleRequest $request
-     * @return void
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(ArticleRequest $request)
     {
@@ -57,12 +62,15 @@ class ArticleController extends Controller
             abort(500);
         }
 
+        Session::flash('success_msg', '釣果情報を投稿しました');
+
         return redirect(route('top'));
     }
 
     /**
      * 記事更新画面の表示
      *
+     * @param Article $article
      * @return View
      */
     public function edit(Article $article): View
@@ -72,9 +80,15 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * 記事更新処理
+     *
+     * @param ArticleRequest $request
+     * @param Article $article
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
     public function update(ArticleRequest $request, Article $article)
     {
-        $user = $request->user();
         $input = $request->all();
 
         DB::beginTransaction();
@@ -86,6 +100,31 @@ class ArticleController extends Controller
             logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
             abort(500);
         }
+
+        Session::flash('success_msg', '釣果情報を更新しました');
+
+        return redirect(route('top'));
+    }
+
+    /**
+     * 記事削除処理
+     *
+     * @param Article $article
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Article $article)
+    {
+        DB::beginTransaction();
+        try {
+            $article->delete();
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
+            abort(500);
+        }
+
+        Session::flash('success_msg', '釣果情報を削除しました');
 
         return redirect(route('top'));
     }
