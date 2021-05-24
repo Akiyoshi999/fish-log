@@ -85,4 +85,11 @@
       {{ $article->comment}}
     </div>
   </div>
+  <div class="card-body pt-0 pb-2 pl-3">
+    <div class="card-text">
+      <article-like v-bind:initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
+        v-bind:initial-is-favorited-by='@json($article->isFavoritedBy(Auth::user()))'>
+      </article-like>
+    </div>
+  </div>
 </div>
