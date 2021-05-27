@@ -64,3 +64,9 @@ php artisan
 
 [Laravel7 から Vue.js を使う最短レシピ
 ](https://qiita.com/fruitriin/items/118c773b045101db7651)
+
+[Laravel で Vuetify を使えるようにする](https://blog.proglearn.com/2020/09/05/%E3%80%902020%E5%B9%B49%E6%9C%88-%E7%8F%BE%E5%9C%A8%E3%80%91laravel%E3%81%A7vuetify%E3%82%92%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B%E5%85%A8%E6%89%8B%E9%A0%86/)
+
+### JS
+
+[async/await 入門](https://www.codegrid.net/articles/2017-async-await-1)

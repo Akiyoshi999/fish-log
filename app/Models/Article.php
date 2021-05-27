@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Article extends Model
 {
@@ -23,9 +24,70 @@ class Article extends Model
         'comment',
     ];
 
+    /**
+     * Usersテーブルとの紐付け
+     *
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * likesテーブルを中間としてUsersと紐付け
+     *
+     * @return BelongsToMany
+     */
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
+    }
+
+    /**
+     * favoritesテーブルを中間としてUsersと紐付け
+     *
+     * @return BelongsToMany
+     */
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    /**
+     * いいね済みかの判定
+     *
+     * @param User|null $user
+     * @return boolean
+     */
+    public function isLikedBy(?User $user): bool
+    {
+        return $user ?
+            (bool)$this->likes->where('id', $user->id)->count()
+            : false;
+    }
+
+    /**
+     * お気に入り済みかの判定
+     *
+     * @param User|null $user
+     * @return boolean
+     */
+    public function isFavoritedBy(?User $user): bool
+    {
+        return $user ?
+            (bool)$this->favorites->where('id', $user->id)->count()
+            : false;
+    }
+
+    /**
+     * いいね数を算出
+     *
+     * @return int
+     */
+    public function getCountLikesAttribute(): int
+    {
+        return $this->likes->count();
     }
 
     /**

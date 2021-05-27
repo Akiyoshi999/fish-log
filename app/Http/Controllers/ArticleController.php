@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
@@ -13,10 +14,10 @@ use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Article::class, 'article');
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Article::class, 'article');
+    // }
 
     /**
      * 投稿記事を全て表示する
@@ -138,5 +139,74 @@ class ArticleController extends Controller
     public function show(Article $article): View
     {
         return view('articles.show', ['article' => $article]);
+    }
+
+
+    /**
+     * いいね処理
+     *
+     * @param Request $request
+     * @param Article $article
+     * @return void
+     */
+    public function like(Request $request, Article $article)
+    {
+        $article->likes()->detach($request->user()->id);
+        $article->likes()->attach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+            'countLikes' => $article->count_likes,
+        ];
+    }
+
+    /**
+     * いいね解除
+     *
+     * @param Request $request
+     * @param Article $article
+     * @return void
+     */
+    public function unlike(Request $request, Article $article)
+    {
+        $article->likes()->detach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+            'countLikes' => $article->count_likes,
+        ];
+    }
+
+    /**
+     * お気に入り登録
+     *
+     * @param Request $request
+     * @param Article $article
+     * @return void
+     */
+    public function favorite(Request $request, Article $article)
+    {
+        $article->favorites()->detach($request->user()->id);
+        $article->favorites()->attach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+        ];
+    }
+
+    /**
+     * お気に入り解除
+     *
+     * @param Request $request
+     * @param Article $article
+     * @return void
+     */
+    public function unfavorite(Request $request, Article $article)
+    {
+        $article->favorites()->detach($request->user()->id);
+
+        return [
+            'id' => $article->id,
+        ];
     }
 }

@@ -1,4 +1,4 @@
-<div class="card mt-3">
+<div class="card bg-light mt-3">
   <div class="card-body d-flex flex-row">
     <i class="fas fa-user-circle fa-3x mr-1"></i>
     <div>
@@ -83,6 +83,16 @@
     <br />
     <div class="card-text text-dark">
       {{ $article->comment}}
+    </div>
+  </div>
+  <div class="card-body pt-0 pb-2 pl-3">
+    <div class="card-text">
+      <article-like :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
+        :initial-is-favorited-by='@json($article->isFavoritedBy(Auth::user()))'
+        v-bind:initial-count-likes='@json($article->count_likes)' :authorized='@json(Auth::check())'
+        like-endpoint="{{route('articles.like',['article'=>$article])}}"
+        favorite-endpoint="{{route('articles.favorite',['article'=>$article])}}">
+      </article-like>
     </div>
   </div>
 </div>
