@@ -67,7 +67,6 @@ class Article extends Model
             : false;
     }
 
-
     /**
      * お気に入り済みかの判定
      *
@@ -79,6 +78,16 @@ class Article extends Model
         return $user ?
             (bool)$this->favorites->where('id', $user->id)->count()
             : false;
+    }
+
+    /**
+     * いいね数を算出
+     *
+     * @return int
+     */
+    public function getCountLikesAttribute(): int
+    {
+        return $this->likes->count();
     }
 
     /**
