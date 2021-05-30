@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TagController;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,4 @@ Route::prefix('articles')->name('articles.')->group(function () {
     Route::put('/{article}/favorite', [ArticleController::class, 'favorite'])->name('favorite')->middleware('auth');
     Route::delete('/{article}/favorite', [ArticleController::class, 'unfavorite'])->name('unfavorite')->middleware('auth');
 });
+Route::get('/tags/{name}', [TagController::class, 'show'])->name('tags.show');

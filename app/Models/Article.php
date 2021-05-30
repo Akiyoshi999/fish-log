@@ -55,6 +55,16 @@ class Article extends Model
     }
 
     /**
+     * article_tagテーブルを中間としてtagsテーブルと紐付け
+     *
+     * @return BelongsToMany
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'article_tag')->using(ArticleTag::class)->withTimestamps();
+    }
+
+    /**
      * いいね済みかの判定
      *
      * @param User|null $user
@@ -90,6 +100,12 @@ class Article extends Model
         return $this->likes->count();
     }
 
+    public function articleTag(): object
+    {
+        return $this->tags->map(function ($tag): array {
+            return ['text' => $tag->name];
+        });
+    }
     /**
      * 記事のコメント表示の制限
      *

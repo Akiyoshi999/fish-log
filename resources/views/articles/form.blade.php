@@ -14,6 +14,10 @@ $fishs = $info['fish'];
   @endif
 </div>
 <div class="form-group">
+  <article-tags-input :initial-tags='@json($tagNames ?? [])' :autocomplete-items='@json($allTagNames ?? [])'>
+  </article-tags-input>
+</div>
+<div class="form-group">
   <label for="date" class="form-label">日時：</label>
   <input class="" type="date" name="date" value="{{ $article->date ?? 2020-01-01 }}" min="2000-01-01" max="2100-12-31">
   @if ($errors->has('date'))

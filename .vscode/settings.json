@@ -3,5 +3,6 @@
     "blade.format.enable": true,
     "[blade]": {
         "editor.defaultFormatter": "onecentlin.laravel-blade"
-    }
+    },
+    "editor.minimap.enabled": false
 }
