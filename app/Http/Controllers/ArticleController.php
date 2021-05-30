@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -11,6 +12,8 @@ use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+
+use function PHPSTORM_META\type;
 
 class ArticleController extends Controller
 {
@@ -37,9 +40,12 @@ class ArticleController extends Controller
      *
      * @return View
      */
-    public function create(): View
+    public function create(Tag $tags): View
     {
-        return view('articles.create');
+        $allTagNames = $tags->AllTagNames();
+        return view('articles.create', [
+            'allTagNames' => $allTagNames,
+        ]);
     }
 
     /**
@@ -55,7 +61,11 @@ class ArticleController extends Controller
 
         DB::beginTransaction();
         try {
-            $user->articles()->create($input);
+            $article = $user->articles()->create($input);
+            $request->tags->each(function ($tagName) use ($article) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $article->tags()->attach($tag);
+            });
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollback();
@@ -74,10 +84,14 @@ class ArticleController extends Controller
      * @param Article $article
      * @return View
      */
-    public function edit(Article $article): View
+    public function edit(Article $article, Tag $tags): View
     {
+        $tagNames = $article->articleTag();
+        $allTagNames = $tags->AllTagNames();
         return view('articles.edit', [
             'article' => $article,
+            'tagNames' => $tagNames,
+            'allTagNames' => $allTagNames,
         ]);
     }
 
@@ -95,6 +109,11 @@ class ArticleController extends Controller
         DB::beginTransaction();
         try {
             $article->fill($input)->save();
+            $article->tags()->detach();
+            $request->tags->each(function ($tagName) use ($article) {
+                $tag = Tag::firstOrCreate(['name' => $tagName]);
+                $article->tags()->attach($tag);
+            });
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollback();

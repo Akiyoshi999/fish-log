@@ -70,3 +70,5 @@ php artisan
 ### JS
 
 [async/await 入門](https://www.codegrid.net/articles/2017-async-await-1)
+
+[キーボードのキーコード](https://javascript.programmer-reference.com/js-list-keycode/)
