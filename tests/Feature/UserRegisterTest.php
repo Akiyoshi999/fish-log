@@ -53,6 +53,23 @@ class UserRegisterTest extends TestCase
     }
 
     /**
+     * ログアウト
+     *
+     * @test
+     */
+    public function LogOut()
+    {
+        $this->post(route('login'), [
+            'email' => 'ubuntu@test.com',
+            'password' => 'password',
+        ]);
+        $response = $this->post(route('logout'));
+        $response->assertStatus(302)
+            ->assertRedirect('/');
+        $this->assertGuest();
+    }
+
+    /**
      * ユーザー登録ができるかの確認
      *
      * @test
@@ -70,6 +87,9 @@ class UserRegisterTest extends TestCase
         $this->assertDatabaseHas('users', [
             'name' => 'user',
             'email' => $email
+        ]);
+        $this->assertDatabaseHas('users', [
+            'name' => 'user',
         ]);
     }
 }

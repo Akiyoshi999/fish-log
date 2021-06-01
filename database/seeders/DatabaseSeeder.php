@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+
+use function GuzzleHttp\Promise\each;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,14 +25,12 @@ class DatabaseSeeder extends Seeder
             ])
             ->create();
         User::factory(2)->create();
-
         $users = User::all();
 
         foreach ($users as $user) {
-            Article::factory()
-                ->count(2)
-                ->for($user)
-                ->create();
+            Article::factory(2)->has(
+                Tag::factory()->count(2)
+            )->for($user)->create();
         }
     }
 }

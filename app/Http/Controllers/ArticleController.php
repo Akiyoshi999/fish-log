@@ -59,6 +59,8 @@ class ArticleController extends Controller
         $user = $request->user();
         $input = $request->all();
 
+        // dd($request, $user, $input);
+
         DB::beginTransaction();
         try {
             $article = $user->articles()->create($input);
