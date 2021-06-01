@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Article;
 use App\Models\User;
+use Carbon\Factory;
 use Illuminate\Database\Seeder;
 
 class ArticleSeeder extends Seeder

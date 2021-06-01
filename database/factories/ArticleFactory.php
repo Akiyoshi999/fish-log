@@ -51,6 +51,16 @@ class ArticleFactory extends Factory
             // テストデータを作成
             // 'user_id' => $this->faker->name,
             'title' => $this->faker->text($maxNbChars = 20),
+            // 'tag' => json_encode([
+            //     [
+            //         "text" => $this->faker->word(),
+            //         "tiClasses" => ["ti-valid"]
+            //     ],
+            //     [
+            //         "text" => $this->faker->word(),
+            //         "tiClasses" => ["ti-valid"]
+            //     ]
+            // ]),
             'date' => $this->faker->dateTimeThisDecade($timezone = "Asia/Tokyo"),
             'place' => $this->faker->randomElement($locale),
             'weather' => $this->faker->randomElement($weather),

@@ -57,6 +57,8 @@ php artisan
 [誰でも簡単! CircleCI で PHPUnit を実行してみよう!!
 ](https://qiita.com/KeisukeKudo/items/d058b359361e622dcc6f)
 
+[【初心者向け】Laravel テストチュートリアル](https://blog.shonansurvivors.com/entry/laravel6-test)
+
 ### Vue
 
 [vuex をまだ理解していない全人類に捧ぐ vuex を利用したコードの図解
