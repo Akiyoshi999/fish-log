@@ -14,6 +14,32 @@ class ArticleRegister extends TestCase
     // $response->dumpSession();
 
     /**
+     * 記事一覧ページの表示(ゲスト)
+     *
+     * @test
+     */
+    public function ViewArticleGuest()
+    {
+        $response = $this->get(route('top'));
+        $response->assertOk()->assertViewIs('articles.index');
+        $this->assertGuest();
+    }
+
+    /**
+     * 記事一覧ページの表示(認証)
+     *
+     * @test
+     */
+    public function ViewArticleAuth()
+    {
+        $user = User::find(1);
+        $this->actingAs($user);
+        $response = $this->get(route('top'));
+        $response->assertOk()->assertViewIs('articles.index');
+        $this->assertAuthenticated();
+    }
+
+    /**
      * ログイン中に記事作成のページが開けるかどうか
      *
      * @test
