@@ -186,9 +186,9 @@ class ArticleController extends Controller
      *
      * @param Request $request
      * @param Article $article
-     * @return void
+     * @return array
      */
-    public function unlike(Request $request, Article $article)
+    public function unlike(Request $request, Article $article): array
     {
         $article->likes()->detach($request->user()->id);
 
@@ -203,9 +203,9 @@ class ArticleController extends Controller
      *
      * @param Request $request
      * @param Article $article
-     * @return void
+     * @return array
      */
-    public function favorite(Request $request, Article $article)
+    public function favorite(Request $request, Article $article): array
     {
         $article->favorites()->detach($request->user()->id);
         $article->favorites()->attach($request->user()->id);

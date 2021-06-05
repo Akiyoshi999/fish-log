@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,5 +51,71 @@ class User extends Authenticatable
     public function articles(): HasMany
     {
         return $this->hasMany('App\Models\Article');
+    }
+
+    /**
+     * favorites → articleへの紐付け
+     *
+     * @return BelongsToMany
+     */
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Models\Article', 'favorites')
+            ->withTimestamps();
+    }
+
+    /**
+     * followsテーブルの紐付け
+     *
+     * @return BelongsToMany
+     */
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Models\User', 'follows', 'followee_id', 'follower_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * フォロワー→フォロー対象へのリレーション
+     *
+     * @return BelongsToMany
+     */
+    public function followings(): BelongsToMany
+    {
+        return $this->belongsToMany('App\Models\User', 'follows', 'follower_id', 'followee_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * フォロー判定
+     *
+     * @param User|null $user
+     * @return boolean
+     */
+    public function isFollowedBy(?User $user): bool
+    {
+        return $user
+            ? (bool)$this->followers->where('id', $user->id)->count()
+            : false;
+    }
+
+    /**
+     * フォロワー数のアクセサ
+     *
+     * @return integer
+     */
+    public function getCountFollowersAttribute(): int
+    {
+        return $this->followers->count();
+    }
+
+    /**
+     * フォロー数のアクセサ
+     *
+     * @return integer
+     */
+    public function getCountFollowingsAttribute(): int
+    {
+        return $this->followings->count();
     }
 }
