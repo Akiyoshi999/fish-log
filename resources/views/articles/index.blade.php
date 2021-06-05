@@ -18,9 +18,15 @@
   <div class="container">
     <div class="card mt-3">
       <div class="card-body d-flex flex-row">
-        <i class="fas fa-user-circle fa-3x mr-1"></i>
+        <a href="{{route('users.show',['name'=>$article->user->name])}}" class="text-dark">
+          <i class="fas fa-user-circle fa-3x mr-1"></i>
+        </a>
         <div>
-          <div class="font-weight-bold">{{ $article->user->name }}</div>
+          <div class="font-weight-bold">
+            <a href="{{route('users.show',['name'=>$article->user->name])}}" class="text-dark">
+              {{ $article->user->name }}
+            </a>
+          </div>
           <div class="font-weight-lighter">{{ $article->created_at->format('Y/m/d H:i') }}</div>
         </div>
 
@@ -72,6 +78,7 @@
 
       </div>
       <div class="card-body pt-0">
+        {{-- <a href="{{route('articles.show',['article'=>$article])}}" class="card-text stretched-link"> --}}
         <h3 class="h4 card-title">
           <a class="text-dark" href="{{ route('articles.show', ['article' => $article]) }}">
             {{ $article->title }}
@@ -80,9 +87,7 @@
         <div class="card-text">
           {{ $article->limitComment($article->comment) }}
         </div>
-      </div>
-      <div>
-        <a href="{{route('articles.show',['article'=>$article])}}" class="card-text stretched-link"></a>
+        {{-- </a> --}}
       </div>
     </div>
   </div>

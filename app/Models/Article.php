@@ -100,6 +100,11 @@ class Article extends Model
         return $this->likes->count();
     }
 
+    /**
+     * 記事のタグ表示
+     *
+     * @return object
+     */
     public function articleTag(): object
     {
         return $this->tags->map(function ($tag): array {

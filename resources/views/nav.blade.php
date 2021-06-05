@@ -38,10 +38,12 @@
 
     {{-- ログイン済 --}}
     @auth
-    <button class="dropdown-item" type="button" onclick="location.href=''">
+    <button class="dropdown-item" type="button"
+      onclick="location.href='{{route("users.show",["name"=>Auth::user()->name])}}'">
       マイページ
     </button>
-    <div class="dropdown-divider"></div>
+    <div class=" dropdown-divider">
+    </div>
     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
       {{ __('Logout') }}
