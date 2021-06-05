@@ -17,10 +17,10 @@ use function PHPSTORM_META\type;
 
 class ArticleController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Article::class, 'article');
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, 'article');
+    }
 
     /**
      * 投稿記事を全て表示する
