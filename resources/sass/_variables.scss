@@ -18,5 +18,9 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 
-$bg-dark: #38c172;
-$btn-secondary: #4b90ff;
+//
+.container-fluid-full {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}

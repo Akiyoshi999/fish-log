@@ -7,5 +7,7 @@
     "Password": "パスワード",
     "Register": "ユーザー登録",
     "Reset Password": "パスワード再設定",
-    "Send Password Reset Link": "メール送信"
+    "Send Password Reset Link": "メール送信",
+    "Remember Me": "ログインを維持する",
+    "Forgot Your Password?": "パスワードを忘れましたか？"
 }

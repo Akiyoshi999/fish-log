@@ -49,6 +49,12 @@ php artisan
 
 [DB のトランザクション try...catch](https://www.it-swarm-ja.com/ja/php/laravel%EF%BC%9Adb-transaction%EF%BC%88%EF%BC%89%E3%81%A7try-catch%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B/1046624976/)
 
+[Laravel 6 ローカライゼーション](https://laraweb.net/tutorial/6949/)
+
+### HTML or CSS or BootStrap
+
+[マージンとパディングの違い](https://www.fenet.jp/dotnet/column/tool/2033/)
+
 ### テスト系
 
 [Laravel7 でログイン画面を作って PHPUnit で動作確認する
