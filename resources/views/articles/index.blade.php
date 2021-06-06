@@ -5,9 +5,10 @@
 @section('content')
 @include('nav')
 
-<main class="container">
-  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
-    <div class="col-md-6 px-0">
+<main>
+  <div class="container-fluid-full">
+    <div class="p-md-5 text-white rounded bg-dark">
+      {{-- <div class="p-5 p-md-5  text-white rounded bg-dark"> --}}
       <h1 class="display-4 font-italic">釣果記録</h1>
       <p class="lead my-3">みなさんの釣果やあなたの釣果を記録してみましょう!</p>
     </div>
