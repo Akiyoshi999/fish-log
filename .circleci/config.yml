@@ -22,6 +22,9 @@ jobs:
       - run:
           name: Install PHP libraries
           command: composer install -n --prefer-dist
+      - run:
+          name: Image creater install
+          command: sudo yum -y install php-gd
       - save_cache:
           paths:
             - ./vendor
