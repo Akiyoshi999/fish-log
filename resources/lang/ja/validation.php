@@ -146,6 +146,16 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'date' => '日付',
+        'place' => '場所',
+        'weather' => '天気',
+        'tide' => '潮',
+        'temperature' => '気温',
+        'fish' => '魚種',
+        'length' => '長さ',
+        'comment' => 'コメント',
+        'image' => '画像',
+    ],
 
 ];

@@ -6,6 +6,9 @@ use App\Models\Article;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ArticleRegister extends TestCase
@@ -81,6 +84,46 @@ class ArticleRegister extends TestCase
     }
 
     /**
+     * 記事が正常に投稿できるか
+     *
+     * @test
+     */
+    public function CreateArticleImage()
+    {
+        Storage::fake('public/uploads');
+        $file = UploadedFile::fake()->image(uniqid() . 'fish.jpg');
+
+        $this->actingAs(User::find(1));
+        $response = $this->post(route('articles.store'), [
+            'title' => '画像アップロードテスト',
+            'tags' => '[{"text":"東京湾","tiClasses":["ti-valid"]}]',
+            'date' => '2021-05-31',
+            'place' => '新潟',
+            'weather' => '晴れ',
+            'tide' => '中潮',
+            'temperature' => '27',
+            'fish' => 'シーバス',
+            'length' => '45',
+            'comment' => 'やったぜ',
+            'image' => $file,
+        ]);
+        $response->assertStatus(302)
+            ->assertRedirect(route('top'));
+
+        $test = Article::where('title', '画像アップロードテスト')->first();
+        $this->assertDatabaseHas('articles', [
+            'title' => '画像アップロードテスト',
+        ]);
+
+        // 対象の画像が保存されているかの確認
+        $name = $file->name;
+        $this->assertTrue(!empty(preg_grep("/$name/", Storage::allFiles('public/uploads'))));
+
+        $target = Article::where("file_name", "LIKE", "%$name%")->first();
+        $this->assertTrue(!empty($target));
+    }
+
+    /**
      * 記事が正常に更新されること
      *
      * @test
@@ -109,7 +152,8 @@ class ArticleRegister extends TestCase
             'length' => '45',
             'comment' => '更新テスト',
         ]));
-        $response->assertStatus(302)->assertRedirect(route('top'));
+        $response->assertStatus(302)
+            ->assertRedirect(route('top'));
         $this->assertDatabaseHas('articles', [
             'title' => '駿河湾でやりました',
         ]);
@@ -138,5 +182,34 @@ class ArticleRegister extends TestCase
 
         $response->assertStatus(302)->assertRedirect(route('top'));
         $this->assertDeleted($article);
+    }
+
+    /**
+     * 記事削除テスト
+     * ストレージの画像が削除されていることを確認
+     *
+     * @test
+     */
+    public function DeleteArticleImage()
+    {
+        Storage::fake('public/uploads');
+
+        $user = User::where('name', 'ubuntu')->first();
+        $this->actingAs($user);
+        $this->assertAuthenticated();
+
+        $article = Article::where('user_id', $user->id)->orderBy('id', 'desc')->first();
+        $file_name = str_replace('uploads/', '', $article->file_name);
+
+        // 記事削除前に画像がストレージに存在していることを確認
+        $this->assertTrue(!empty(preg_grep("/$file_name/", Storage::allFiles('public/uploads'))));
+        $response = $this->delete(route('articles.destroy', [
+            'article' => $article,
+        ]));
+        $response->assertStatus(302)->assertRedirect(route('top'));
+        $this->assertDeleted($article);
+
+        // 記事削除後に画像がストレージから削除されていることを確認
+        $this->assertTrue(empty(preg_grep("/$file_name/", Storage::allFiles('public/uploads'))));
     }
 }

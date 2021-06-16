@@ -84,14 +84,17 @@
       魚種：{{ $article->fish}}
     </div>
     <div class="card-text">
-      長さ：{{ $article->length}}
+      長さ：{{ $article->length}} cm
     </div>
     <br />
     <div class="card-text text-dark">
       {{ $article->comment}}
     </div>
   </div>
-  <div class="card-body pt-0 pb-2 pl-3">
+  <div class="card-body">
+    <img class="rounded" src="{{Storage::url($article->file_name)}}" alt="">
+  </div>
+  <div class=" card-body pt-0 pb-2 pl-3">
     <div class="card-text">
       <article-like :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
         :initial-is-favorited-by='@json($article->isFavoritedBy(Auth::user()))'

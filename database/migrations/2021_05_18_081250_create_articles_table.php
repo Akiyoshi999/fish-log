@@ -25,6 +25,7 @@ class CreateArticlesTable extends Migration
             $table->string('fish');
             $table->integer('length');
             $table->text('comment');
+            $table->string('file_name')->nullable();
             $table->timestamps();
 
             // 関連付け
