@@ -23,8 +23,10 @@ jobs:
           name: Install PHP libraries
           command: composer install -n --prefer-dist
       - run:
-          name: Image creater install
-          command: sudo yum -y install php-gd
+          name: Install php-gd
+          command: |
+            sudo apt-get -y install libpng-dev
+            sudo docker-php-ext-install  gd
       - save_cache:
           paths:
             - ./vendor
