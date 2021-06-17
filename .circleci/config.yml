@@ -17,12 +17,6 @@ jobs:
           command: |
             sudo apt-get -y install libpng-dev
             sudo docker-php-ext-install gd
-      - run:
-          name: php-gd install
-          command: docker-php-ext-install pdo gd
--run :
-name: php-gd 
-command: docker-php-ext-configure gd --with-gd --with-jpeg-dir --with-png-dir --with-zlib-dir
 
       - run:
           name: Docker php extensions install
