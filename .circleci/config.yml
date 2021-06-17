@@ -14,9 +14,7 @@ jobs:
           command: sudo apt-get update
       - run:
           name: Install php-gd
-          command: |
-            sudo apt-get -y install libpng-dev
-            sudo docker-php-ext-install  gd
+          command: sudo docker-php-ext-install gd
       - run:
           name: Docker php extensions install
           command: sudo docker-php-ext-install pdo_mysql
