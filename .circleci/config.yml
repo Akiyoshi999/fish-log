@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3.0-node-browsers
+      - image: circleci/php:7.3.24-node-browsers
       - image: circleci/mariadb:10.4
     environment:
       - DB_CONNECTION: circle_testing
@@ -12,6 +12,13 @@ jobs:
       - run:
           name: Update apt-get
           command: sudo apt-get update
+      - run:
+          name: Install php-gd
+          command: |
+            sudo apt-get install -y libjpeg62-turbo-dev libpng-dev 
+            sudo docker-php-ext-configure gd --with-gd --with-jpeg-dir=/usr/lib/
+            sudo docker-php-ext-install gd
+            
       - run:
           name: Docker php extensions install
           command: sudo docker-php-ext-install pdo_mysql

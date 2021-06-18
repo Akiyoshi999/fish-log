@@ -9,9 +9,6 @@ $fishs = $info['fish'];
 <div class="mb-3">
   <label for="title" class="form-label">タイトル</label>
   <input class="form-control" type="text" name="title" required value="{{ $article->title ?? old('title') }}">
-  @if ($errors->has('user'))
-  <div class="text-danger">{{ $errors->first('user') }}</div>
-  @endif
 </div>
 <div class="form-group">
   <article-tags-input :initial-tags='@json($tagNames ?? [])' :autocomplete-items='@json($allTagNames ?? [])'>
@@ -19,10 +16,8 @@ $fishs = $info['fish'];
 </div>
 <div class="form-group">
   <label for="date" class="form-label">日時：</label>
-  <input class="" type="date" name="date" value="{{ $article->date ?? 2020-01-01 }}" min="2000-01-01" max="2100-12-31">
-  @if ($errors->has('date'))
-  <div class="text-danger">{{ $errors->first('date') }}</div>
-  @endif
+  <input class="" type="date" name="date" value="{{ $article->date ?? date('Y-m-d') }}" min="2000-01-01"
+    max="2100-12-31">
 </div>
 <div class="form-group">
   <label for="place" class="form-label">場所：</label>
@@ -35,9 +30,6 @@ $fishs = $info['fish'];
     @endif
     @endforeach
   </select>
-  @if ($errors->has('place'))
-  <div class="text-danger">{{ $errors->first('place') }}</div>
-  @endif
 </div>
 <div class="form-group">
   <label for="weather" class="form-label">天気：</label>
@@ -50,9 +42,6 @@ $fishs = $info['fish'];
     @endif
     @endforeach
   </select>
-  @if ($errors->has('weather'))
-  <div class="text-danger">{{ $errors->first('weather') }}</div>
-  @endif
 </div>
 <div class="form-group">
   <label for="tide" class="form-label">潮　：</label>
@@ -65,16 +54,10 @@ $fishs = $info['fish'];
     @endif
     @endforeach
   </select>
-  @if ($errors->has('tide'))
-  <div class="text-danger">{{ $errors->first('tide') }}</div>
-  @endif
 </div>
 <div class="form-group">
   <label for="temperature" class="form-label">温度：</label>
-  <input type="number" name="temperature" value="{{ $article->temperature ?? '' }}" min="-10" max="50" value="15">
-  @if ($errors->has('temperature'))
-  <div class="text-danger">{{ $errors->first('temperature') }}</div>
-  @endif
+  <input type="number" name="temperature" value="{{ $article->temperature ?? '0' }}" min="-10" max="50" value="15">
 </div>
 <div class="form-group">
   <label for="fish" class="form-label">魚種：</label>
@@ -87,20 +70,18 @@ $fishs = $info['fish'];
     @endif
     @endforeach
   </select>
-  @if ($errors->has('fish'))
-  <div class="text-danger">{{ $errors->first('fish') }}</div>
-  @endif
 </div>
 <div class="form-group">
   <label for="length" class="form-label">長さ：</label>
-  <input id="length" name="length" type="number" value="{{ $article->length ?? '' }}">
+  <input id="length" name="length" type="number" value="{{ $article->length ?? '0' }}">
   <span>cm</span>
-  @if ($errors->has('length'))
-  <div class="text-danger">{{ $errors->first('length') }}</div>
-  @endif
   <div class="form-group">
     <label for="comment" class="form-label">本文</label>
-    <textarea name="comment" placeholder="" rows="10" class="form-control" required>
+    <textarea name="comment" placeholder="" rows="10" class="form-control">
       {{ $article->comment ?? ''}}
   </textarea>
   </div>
+  <div class="form-group">
+    <preview-image>
+  </div>
+</div>

@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleFactory extends Factory
 {
@@ -47,6 +49,11 @@ class ArticleFactory extends Factory
             "サヨリ", "イサキ", "ダツ", "シイラ", "マグロ",
         ];
 
+        // $file = UploadedFile::fake()->image('AAA.jpg')->save(storage_path('app/public/uploads/' . uniqid() . '.jpg'));
+        $file = UploadedFile::fake()->image('AAA.jpg');
+        $file_path = Storage::putFile('public/uploads', $file);
+        $file_path = str_replace('public/', '', $file_path);
+
         return [
             // テストデータを作成
             // 'user_id' => $this->faker->name,
@@ -69,6 +76,7 @@ class ArticleFactory extends Factory
             'fish' => $this->faker->randomElement($fish),
             'length' => $this->faker->numberBetween($min = 0, $max = 200),
             'comment' => $this->faker->realText($maxNbChars = 50),
+            'file_name' => $file_path,
         ];
     }
 }

@@ -3,6 +3,7 @@ import Vue from "vue";
 import ArticleLike from "./components/ArticleLike";
 import ArticleTagsInput from "./components/ArticleTagsInput";
 import FollowButton from "./components/FollowButton";
+import PreviewImage from "./components/PreviewImage";
 // import Components from "laravel-mix/src/comonents/Components";
 
 window.Vue = require("vue").default;
@@ -16,6 +17,7 @@ const app = new Vue({
     components: {
         ArticleLike,
         ArticleTagsInput,
-        FollowButton
+        FollowButton,
+        PreviewImage
     }
 });

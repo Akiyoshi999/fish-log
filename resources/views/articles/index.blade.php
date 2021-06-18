@@ -10,7 +10,9 @@
     <div class="p-md-5 text-white rounded bg-dark">
       {{-- <div class="p-5 p-md-5  text-white rounded bg-dark"> --}}
       <h1 class="display-4 font-italic">釣果記録</h1>
-      <p class="lead my-3">みなさんの釣果やあなたの釣果を記録してみましょう!</p>
+      <p class="lead my-3">
+        釣果を検索したりあなたの釣果を記録してみましょう!
+      </p>
     </div>
   </div>
 

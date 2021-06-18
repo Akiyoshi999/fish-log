@@ -22,6 +22,7 @@ class Article extends Model
         'fish',
         'length',
         'comment',
+        'file_name',
     ];
 
     /**
@@ -111,6 +112,7 @@ class Article extends Model
             return ['text' => $tag->name];
         });
     }
+
     /**
      * 記事のコメント表示の制限
      *
