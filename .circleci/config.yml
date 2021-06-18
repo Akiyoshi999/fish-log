@@ -16,6 +16,7 @@ jobs:
           name: Install php-gd
           command: |
             sudo apt-get -y install libpng-dev
+            sudo docker-php-ext-configure gd --with-freetype --with-jpeg
             sudo docker-php-ext-install gd
 
       - run:
