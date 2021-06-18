@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Update apt-get
-          command: sudo apt-get update
+          command: sudo apt-get update \
     gcc \
     make \
     libpng-dev \
