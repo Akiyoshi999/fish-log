@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Models\Article;
@@ -27,11 +28,13 @@ Route::resource('/articles', ArticleController::class)
 
 Route::resource('/articles', ArticleController::class)->only(['show']);
 
-Route::prefix('articles')->name('articles.')->group(function () {
-    Route::put('/{article}/like', [ArticleController::class, 'like'])->name('like')->middleware('auth');
-    Route::delete('/{article}/like', [ArticleController::class, 'unlike'])->name('unlike')->middleware('auth');
-    Route::put('/{article}/favorite', [ArticleController::class, 'favorite'])->name('favorite')->middleware('auth');
-    Route::delete('/{article}/favorite', [ArticleController::class, 'unfavorite'])->name('unfavorite')->middleware('auth');
+Route::prefix('articles/{article}')->name('articles.')->group(function () {
+    Route::put('/like', [ArticleController::class, 'like'])->name('like')->middleware('auth');
+    Route::delete('/like', [ArticleController::class, 'unlike'])->name('unlike')->middleware('auth');
+    Route::put('/favorite', [ArticleController::class, 'favorite'])->name('favorite')->middleware('auth');
+    Route::delete('/favorite', [ArticleController::class, 'unfavorite'])->name('unfavorite')->middleware('auth');
+    Route::resource('/comment', CommentController::class)
+        ->except(['show', 'edit', 'index', 'create']);
 });
 
 Route::get('/tags/{name}', [TagController::class, 'show'])->name('tags.show');

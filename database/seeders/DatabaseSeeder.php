@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -18,19 +19,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()
-            ->state([
-                'name' => 'ubuntu',
-                'email' => 'ubuntu@test.com',
-            ])
-            ->create();
-        User::factory(2)->create();
-        $users = User::all();
-
-        foreach ($users as $user) {
-            Article::factory(2)->has(
-                Tag::factory()->count(2)
-            )->for($user)->create();
-        }
+        $this->call([
+            UserSeeder::class,
+            ArticleSeeder::class
+        ]);
     }
 }
