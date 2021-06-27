@@ -45,6 +45,7 @@ class Article extends Model
         return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
 
+
     /**
      * favoritesテーブルを中間としてUsersと紐付け
      *
@@ -63,6 +64,17 @@ class Article extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'article_tag')->using(ArticleTag::class)->withTimestamps();
+    }
+
+    /**
+     * user_article_commentテーブルを中間としてcommentsテーブルと紐付け
+     *
+     * @return BelongsToMany
+     */
+    public function comments(): BelongsToMany
+    {
+        return $this->belongsToMany(Comment::class, 'user_article_comment')
+            ->using(UserArticleComment::class)->withPivot('user_id')->withTimestamps();
     }
 
     /**

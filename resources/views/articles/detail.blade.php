@@ -118,3 +118,69 @@
   @endif
   @endforeach
 </div>
+
+@foreach ($article->comments as $article_comment)
+<article-comment :comment-user='@json($article_comment->pivot->user->name)' :comment='@json($article_comment->content)'
+  :authorized='@json(Auth::id() === $article_comment->pivot->user_id)'
+  update-endpoint="{{route('articles.comment.update', ['article' => $article, 'comment'=>$article_comment]) }}"
+  delete-endpoint="{{route('articles.comment.destroy',['article'=>$article,'comment'=>$article_comment])}}"
+  url="{{route('articles.show',['article'=>$article])}}">
+</article-comment>
+@endforeach
+
+<!-- ログイン済みの場合のみコメント投稿機能表示 -->
+@auth
+<form method="POST" action="{{ route('articles.comment.store',['article'=>$article]) }}">
+  @csrf
+  <div class="bg-light p-2">
+    <div class="d-flex flex-row align-items-start">
+      <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+      <h5>{{ Auth::user()->name }}</h5>
+    </div>
+    <div class="pl-2 pt-2">
+      <textarea name="content" class="form-control ml-1 shadow-none textarea">
+    </textarea>
+    </div>
+    <div class="mt-2 text-right">
+      <button class="btn btn-primary btn-sm shadow-none" type="submit">
+        Post comment
+      </button>
+      <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+    </div>
+  </div>
+</form>
+@endauth
+
+<!-- テスト -->
+{{-- <form method="POST"
+  action="{{ route('articles.comment.update',['article'=>$article,'comment'=>$article->comments->first()]) }}">
+@csrf
+@method('PUT')
+<div class="bg-light p-2">
+  <div class="d-flex flex-row align-items-start">
+    <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+    <h5>{{ Auth::user()->name }}</h5>
+  </div>
+  <div class="pl-2 pt-2">
+    <textarea name="content" class="form-control ml-1 shadow-none textarea">
+        {{$article->comments->first()->content}}
+    </textarea>
+  </div>
+  <div class="mt-2 text-right">
+    <button class="btn btn-primary btn-sm shadow-none" type="submit">
+      Post comment
+    </button>
+    <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
+  </div>
+</div>
+</form> --}}
+
+@if ($errors->any())
+<div class="card-text text-left alert alert-danger">
+  <ul class="mb-0">
+    @foreach($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif

@@ -16,9 +16,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()
-            // ->has(Article::factory()->count(2))
-            // ->hasArticles(2)
-            // ->count(10)
+            ->state([
+                'name' => 'ubuntu',
+                'email' => 'ubuntu@test.com',
+            ])
             ->create();
+        User::factory(2)->create();
     }
 }

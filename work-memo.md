@@ -42,12 +42,25 @@ php artisan
 
 1. public 配下にアップロードした画像が保存されない
 
-    原因：php artisan storage:link をしていなかった
+    原因
+    php artisan storage:link をしていなかった
 
 1. ファイルアップロードのテストで画像が正常に保存されているかの方法がピンとしなかった
 
-    解決方法：テスト時に使用する画像の名前をユニーク(uniqid で)な値をもたせ Storage から全ファイル取得し,preg_grep でマッチするかどうかを確認する。
+    解決方法
+    テスト時に使用する画像の名前をユニーク(uniqid で)な値をもたせ Storage から全ファイル取得し,preg_grep でマッチするかどうかを確認する。
     マッチした場合は true を返却し、テストすることができた
+
+1. circle CI で PHP-GD の Jpeg Support が有効にならない
+
+    原因
+    ライブラリが不足していたことと、php インストール時のオプションに'--with-gd --with-jpeg-dir'がなかった
+
+    解決
+    .circleci/config.yml に以下の記載を載せる
+    sudo apt-get install -y libjpeg62-turbo-dev libpng-dev
+    sudo docker-php-ext-configure gd --with-gd --with-jpeg-dir=/usr/lib/
+    sudo docker-php-ext-install gd
 
 ## 参考記事
 
@@ -71,31 +84,37 @@ php artisan
 
 [Laravel の Eloquent で LIKE を使う](https://laravel.hatenablog.com/entry/2013/11/23/004019)
 
+[PHP インストールマニュアル](https://www.php.net/manual/ja/image.installation.php)
+
+[Laravel の Blade ビューで現在の URL を取得する](https://pgmemo.tokyo/data/archives/1325.html)
+
+[【Laravel】わりとよく使う Artisan コマンド集](https://qiita.com/sola-msr/items/a09b857c5e7f7c88d01d)
+
 ### HTML or CSS or BootStrap
 
 [マージンとパディングの違い](https://www.fenet.jp/dotnet/column/tool/2033/)
 
 ### テスト系
 
-[Laravel7 でログイン画面を作って PHPUnit で動作確認する
-](https://engineer-lady.com/program_info/create-login-phpunit-laravel7/)
+[Laravel7 でログイン画面を作って PHPUnit で動作確認する](https://engineer-lady.com/program_info/create-login-phpunit-laravel7/)
 
-[誰でも簡単! CircleCI で PHPUnit を実行してみよう!!
-](https://qiita.com/KeisukeKudo/items/d058b359361e622dcc6f)
+[誰でも簡単! CircleCI で PHPUnit を実行してみよう!!](https://qiita.com/KeisukeKudo/items/d058b359361e622dcc6f)
 
 [【初心者向け】Laravel テストチュートリアル](https://blog.shonansurvivors.com/entry/laravel6-test)
 
 ### Vue
 
-[vuex をまだ理解していない全人類に捧ぐ vuex を利用したコードの図解
-](https://qiita.com/fruitriin/items/42b0ebc5f8a524a0ae17)
+[vuex をまだ理解していない全人類に捧ぐ vuex を利用したコードの図解](https://qiita.com/fruitriin/items/42b0ebc5f8a524a0ae17)
 
-[Laravel7 から Vue.js を使う最短レシピ
-](https://qiita.com/fruitriin/items/118c773b045101db7651)
+[Laravel7 から Vue.js を使う最短レシピ](https://qiita.com/fruitriin/items/118c773b045101db7651)
 
 [Laravel で Vuetify を使えるようにする](https://blog.proglearn.com/2020/09/05/%E3%80%902020%E5%B9%B49%E6%9C%88-%E7%8F%BE%E5%9C%A8%E3%80%91laravel%E3%81%A7vuetify%E3%82%92%E4%BD%BF%E3%81%88%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B%E5%85%A8%E6%89%8B%E9%A0%86/)
 
 [input で選択した画像のプレビューを表示したい vue.js 利用](https://reffect.co.jp/vue/input-image-previes-vue-js#2)
+
+[Vue.js redirection to another page](https://stackoverflow.com/questions/35664550/vue-js-redirection-to-another-page)
+
+[Vue.js で Form の各要素を Component 化する際の覚え書き](https://qiita.com/ryo2132/items/2e3fcedaffeff9fc3967)
 
 ### JS
 
