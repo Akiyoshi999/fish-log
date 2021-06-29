@@ -134,8 +134,9 @@
   @csrf
   <div class="bg-light p-2">
     <div class="d-flex flex-row align-items-start">
-      <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-      <h5>{{ Auth::user()->name }}</h5>
+      <i class="fas fa-user-circle fa-2x mr-1" width="40"></i>
+      {{-- <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"> --}}
+      <h5 class="pl-1">{{ Auth::user()->name }}</h5>
     </div>
     <div class="pl-2 pt-2">
       <textarea name="content" class="form-control ml-1 shadow-none textarea">

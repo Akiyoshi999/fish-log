@@ -1,11 +1,12 @@
 <template>
     <div class="bg-light p-2">
         <div class="d-flex flex-row align-items-start">
-            <img
+            <i class="fas fa-user-circle fa-2x mr-1" width="40"></i>
+            <!--<img
                 class="rounded-circle"
                 src="https://i.imgur.com/RpzrMR2.jpg"
                 width="40"
-            />
+            /> -->
             <h5 class="pl-1">{{ isCommentUser }}</h5>
             <div class="ml-auto card-text">
                 <!-- Drop Down -->
