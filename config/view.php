@@ -56,6 +56,13 @@ return [
         "シーバス", "タイ", "アジ", "太刀魚", "メバル", "カサゴ", "ブリ", "イカ",
         "ヒラメ", "タコ", "カマス", "カレイ", "サワラ", "カンパチ", "イサキ",
         "サヨリ", "イサキ", "ダツ", "シイラ", "マグロ", "その他"
+    ],
+
+    'icons' => [
+        "fas fa-user-circle", "fas fa-user-ninja", "fab fa-android", "fab fa-github-alt",
+        "fab fa-android", "fas fa-crow", "fas fa-dog",
+        "fas fa-dove", "fas fa-frog", "fas fa-ghost", "fas fa-hippo",
+        "fas fa-fish",  "fas fa-rocket", "fas fa-spider",
     ]
 
 ];

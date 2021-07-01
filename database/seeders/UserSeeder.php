@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             ->state([
                 'name' => 'ubuntu',
                 'email' => 'ubuntu@test.com',
+                'icon' => 'fas fa-user-circle'
             ])
             ->create();
         User::factory(2)->create();

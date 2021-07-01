@@ -90,6 +90,8 @@ php artisan
 
 [【Laravel】わりとよく使う Artisan コマンド集](https://qiita.com/sola-msr/items/a09b857c5e7f7c88d01d)
 
+[[PHP/Laravel] Eloquent モデルで初期値(デフォルト値)を設定したいときは\$attributes を触ってなんとかする。](http://nisihunabasi.mods.jp/blog/?p=804)
+
 ### HTML or CSS or BootStrap
 
 [マージンとパディングの違い](https://www.fenet.jp/dotnet/column/tool/2033/)

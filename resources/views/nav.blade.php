@@ -19,9 +19,16 @@
       <!-- Dropdown -->
       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
+        @auth
+        <i class="{{ Auth::user()->icon }} black-text">
+          {{ Auth::user() ? Auth::user()->name:"ゲスト" }}
+        </i>
+        @endauth
+        @guest
         <i class="fas fa-user-circle black-text">
           {{ Auth::user() ? Auth::user()->name:"ゲスト" }}
         </i>
+        @endguest
       </a>
       <div class=" dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
         {{-- ゲストのナビゲーション --}}
@@ -43,7 +50,7 @@
         </button>
         <div class=" dropdown-divider">
         </div>
-        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+        <a class="dropdown-item ml-3" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
           {{ __('Logout') }}
         </a>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use League\CommonMark\Inline\Element\Strong;
 
@@ -25,6 +27,36 @@ class UserController extends Controller
             'articles' => $articles,
         ]);
     }
+
+    /**
+     * ユーザー情報更新
+     *
+     * @param Request $request
+     * @param User $user
+     * @return View
+     */
+    public function update(Request $request, User $user): View
+    {
+        $input = $request->all();
+        DB::beginTransaction();
+        try {
+            $user->fill([
+                'name' => $input['name'],
+                'icon' => $input['icon'],
+            ])->save();
+            DB::commit();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
+            abort(500);
+        }
+        $articles = $user->articles->sortByDesc('created_at');
+        return view('users.show', [
+            'user' => $user,
+            'articles' => $articles,
+        ]);
+    }
+
 
     /**
      * お気に入りした記事の表示
