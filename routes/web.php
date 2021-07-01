@@ -41,6 +41,7 @@ Route::get('/tags/{name}', [TagController::class, 'show'])->name('tags.show');
 
 Route::prefix('users')->name('users.')->group(function () {
     Route::get('/{name}', [UserController::class, 'show'])->name('show');
+    Route::put('/{user}/update', [UserController::class, 'update'])->name('update');
     Route::get('/{name}/favorites', [UserController::class, 'favorites'])->name('favorites');
     Route::get('/{name}/followings', [UserController::class, 'followings'])->name('followings');
     Route::get('/{name}/followers', [UserController::class, 'followers'])->name('followers');
