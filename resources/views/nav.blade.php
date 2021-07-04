@@ -3,12 +3,12 @@
 
     <div class="d-flex justify-content-start mt-2">
       <a class="navbar-brand black-text" href="{{route('top')}}">釣果記録一覧</a>
-      <form class="d-flex input-group w-auto">
-        <input type="search" class="form-control rounded" placeholder="検索" aria-label="Search"
+      <form class="d-flex input-group w-auto" method="GET" action="{{route('search')}}">
+        <input type="search" class="form-control rounded" placeholder="検索" aria-label="Search" name="word"
           aria-describedby="search-addon" />
-        <span class="input-group-text text-white border-0" id="search-addon">
+        <button type="submit" class="input-group-text text-white border-0" id="search-addon">
           <i class="fas fa-search black-text"></i>
-        </span>
+        </button>
       </form>
     </div>
 

@@ -212,4 +212,39 @@ class ArticleRegister extends TestCase
         // 記事削除後に画像がストレージから削除されていることを確認
         $this->assertTrue(empty(preg_grep("/$file_name/", Storage::allFiles('public/uploads'))));
     }
+
+    /**
+     * 記事検索(ゲスト)
+     *
+     * @test
+     */
+    public function SearchGuest()
+    {
+        $article = Article::find(1);
+        $response = $this->get(route('search', [
+            'word' => mb_substr($article->comment, 0, 3)
+        ]));
+
+        $this->assertGuest();
+        $response->assertViewIs('articles.index')
+            ->assertSeeText(mb_substr($article->comment, 0, 3));
+    }
+
+    /**
+     * 記事検索(認証)
+     *
+     * @test
+     */
+    public function SearchAuth()
+    {
+        $this->actingAs(User::find(1));
+        $article = Article::find(1);
+        $response = $this->get(route('search', [
+            'word' => mb_substr($article->comment, 0, 3)
+        ]));
+
+        $this->assertAuthenticated();
+        $response->assertViewIs('articles.index')
+            ->assertSeeText(mb_substr($article->comment, 0, 3));
+    }
 }
