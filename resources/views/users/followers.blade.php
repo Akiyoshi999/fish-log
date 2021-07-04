@@ -6,7 +6,7 @@
 @include('nav')
 <div class="container">
   @include('users.user')
-  @include('users.tabs', ['hasArticles' => false, 'hasFavorites' => false])
+  @include('users.followtabs', ['hasFollowings' => false, 'hasFollowers' => true])
   @foreach($followers as $person)
   @include('users.person')
   @endforeach

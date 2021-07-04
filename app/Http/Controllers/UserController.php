@@ -15,12 +15,12 @@ class UserController extends Controller
     /**
      * ユーザーページ表示
      *
-     * @param string $name
+     * @param User $user
      * @return View
      */
-    public function show(string $name): View
+    public function show(User $user): View
     {
-        $user = User::where('name', $name)->first();
+        // $user = User::where('name', $name)->first();
         $articles = $user->articles->sortByDesc('created_at');
         return view('users.show', [
             'user' => $user,
@@ -61,12 +61,11 @@ class UserController extends Controller
     /**
      * お気に入りした記事の表示
      *
-     * @param string $name
+     * @param User $user
      * @return View
      */
-    public function favorites(string $name): View
+    public function favorites(User $user): View
     {
-        $user = User::where('name', $name)->first();
         $articles = $user->favorites->sortByDesc('created_at');
         return view('users.favorites', [
             'user' => $user,
@@ -77,12 +76,12 @@ class UserController extends Controller
     /**
      * フォローユーザーの表示
      *
-     * @param string $name
+     * @param User $user
      * @return View
      */
-    public function followings(string $name): View
+    public function followings(User $user): View
     {
-        $user = User::where('name', $name)->first();
+        // $user = User::where('name', $name)->first();
         $followings = $user->followings->sortByDesc('created_at');
         return view('users.followings', [
             'user' => $user,
@@ -93,12 +92,12 @@ class UserController extends Controller
     /**
      * フォロワー表示
      *
-     * @param string $name
+     * @param User $user
      * @return View
      */
-    public function followers(string $name): View
+    public function followers(User $user): View
     {
-        $user = User::where('name', $name)->first();
+        // $user = User::where('name', $name)->first();
         $followers = $user->followers->sortByDesc('created_at');
         return view('users.followers', [
             'user' => $user,

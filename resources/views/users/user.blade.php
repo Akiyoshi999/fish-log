@@ -5,17 +5,17 @@ $icons = $view_conf['icons'];
 <div class="card mt-3">
   <div class="card-body">
     <div class="d-flex flex-row">
-      <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-        {{-- <i class="fas fa-user-circle fa-3x"></i> --}}
+      <a href="{{ route('users.show', ['user' => $user]) }}" class="text-dark">
         <i class="{{ $user->icon }} fa-3x"></i>
       </a>
-
 
       @if (Auth::id() !== $user->id)
       <follow-button class="ml-auto" v-bind:initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
         v-bind:authorized='@json(Auth::check())' endpoint='{{route("users.follow",["name"=>$user->name])}}'>
       </follow-button>
       @endif
+
+      @if (Auth::id() === $user->id)
 
       <!-- Button trigger modal -->
       <div class="pull-right pl-5">
@@ -71,20 +71,21 @@ $icons = $view_conf['icons'];
           </div>
         </div>
       </div>
+      @endif
     </div>
 
     <h2 class="h5 card-title m-0">
-      <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
+      <a href="{{ route('users.show', ['user' => $user]) }}" class="text-dark">
         {{ $user->name }}
       </a>
     </h2>
   </div>
   <div class="card-body">
     <div class="card-text">
-      <a href="{{route('users.followings',['name'=>$user->name])}}" class="text-muted">
+      <a href="{{route('users.followings',['user'=>$user])}}" class="text-muted">
         {{$user->count_followings}} フォロー
       </a>
-      <a href="{{route('users.followers',['name'=>$user->name])}}" class="text-muted">
+      <a href="{{route('users.followers',['user'=>$user])}}" class="text-muted">
         {{$user->count_followers}} フォロワー
       </a>
     </div>

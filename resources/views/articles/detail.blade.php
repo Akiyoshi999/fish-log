@@ -1,11 +1,11 @@
 <div class="card mt-3">
   <div class="card-body d-flex flex-row">
-    <a href="{{route('users.show',['name'=>$article->user->name])}}" class="text-dark">
-      <i class="fas fa-user-circle fa-3x mr-1"></i>
+    <a href="{{route('users.show',['user'=>$article->user])}}" class="text-dark">
+      <i class="{{ $article->user->icon }} fa-3x mr-1"></i>
     </a>
     <div>
       <div class="font-weight-bold">
-        <a href="{{route('users.show',['name'=>$article->user->name])}}" class="text-dark">
+        <a href="{{route('users.show',['user'=>$article->user])}}" class="text-dark">
           {{ $article->user->name }}
         </a>
       </div>
@@ -124,7 +124,7 @@
   :authorized='@json(Auth::id() === $article_comment->pivot->user_id)'
   update-endpoint="{{route('articles.comment.update', ['article' => $article, 'comment'=>$article_comment]) }}"
   delete-endpoint="{{route('articles.comment.destroy',['article'=>$article,'comment'=>$article_comment])}}"
-  url="{{route('articles.show',['article'=>$article])}}">
+  url="{{route('articles.show',['article'=>$article])}}" user-icon="{{$article_comment->pivot->user->icon}} fa-2x mr-2">
 </article-comment>
 @endforeach
 
@@ -134,7 +134,7 @@
   @csrf
   <div class="bg-light p-2">
     <div class="d-flex flex-row align-items-start">
-      <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+      <i class="{{ Auth::user()->icon }} fa-2x mr-2"></i>
       <h5>{{ Auth::user()->name }}</h5>
     </div>
     <div class="pl-2 pt-2">
@@ -151,15 +151,14 @@
 </form>
 @endauth
 
-<!-- テスト -->
 {{-- <form method="POST"
   action="{{ route('articles.comment.update',['article'=>$article,'comment'=>$article->comments->first()]) }}">
 @csrf
 @method('PUT')
 <div class="bg-light p-2">
   <div class="d-flex flex-row align-items-start">
-    <img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
-    <h5>{{ Auth::user()->name }}</h5>
+    <i class="{{ $article->user->icon }} fa-2x mr-2"></i>
+    <h5>{{ Auth::user()->name }} </h5>
   </div>
   <div class="pl-2 pt-2">
     <textarea name="content" class="form-control ml-1 shadow-none textarea">

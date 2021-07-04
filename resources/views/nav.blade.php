@@ -45,7 +45,7 @@
         {{-- ログイン済 --}}
         @auth
         <button class="dropdown-item" type="button"
-          onclick="location.href='{{route("users.show",["name"=>Auth::user()->name])}}'">
+          onclick="location.href='{{route("users.show",["user"=>Auth::user()])}}'">
           マイページ
         </button>
         <div class=" dropdown-divider">
