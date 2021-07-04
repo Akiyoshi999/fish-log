@@ -59,6 +59,10 @@ class ArticleController extends Controller
     {
         $user = $request->user();
         $input = $request->all();
+        dd(
+            $input,
+            gettype($input['date'])
+        );
 
         $input = $request->preprocessing($input);
 

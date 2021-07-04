@@ -1,11 +1,7 @@
 <template>
     <div class="bg-light p-2">
         <div class="d-flex flex-row align-items-start">
-            <img
-                class="rounded-circle"
-                src="https://i.imgur.com/RpzrMR2.jpg"
-                width="40"
-            />
+            <i :class="userIcon"></i>
             <h5 class="pl-1">{{ isCommentUser }}</h5>
             <div class="ml-auto card-text">
                 <!-- Drop Down -->
@@ -99,6 +95,9 @@ export default {
             type: String
         },
         url: {
+            type: String
+        },
+        userIcon: {
             type: String
         }
     },

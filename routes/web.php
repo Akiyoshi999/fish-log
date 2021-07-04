@@ -40,11 +40,11 @@ Route::prefix('articles/{article}')->name('articles.')->group(function () {
 Route::get('/tags/{name}', [TagController::class, 'show'])->name('tags.show');
 
 Route::prefix('users')->name('users.')->group(function () {
-    Route::get('/{name}', [UserController::class, 'show'])->name('show');
+    Route::get('/{user}', [UserController::class, 'show'])->name('show');
     Route::put('/{user}/update', [UserController::class, 'update'])->name('update');
-    Route::get('/{name}/favorites', [UserController::class, 'favorites'])->name('favorites');
-    Route::get('/{name}/followings', [UserController::class, 'followings'])->name('followings');
-    Route::get('/{name}/followers', [UserController::class, 'followers'])->name('followers');
+    Route::get('/{user}/favorites', [UserController::class, 'favorites'])->name('favorites');
+    Route::get('/{user}/followings', [UserController::class, 'followings'])->name('followings');
+    Route::get('/{user}/followers', [UserController::class, 'followers'])->name('followers');
     Route::middleware('auth')->group(function () {
         Route::put('/{name}/follow', [UserController::class, 'follow'])->name('follow');
         Route::delete('/{name}/follow', [UserController::class, 'unfollow'])->name('unfollow');

@@ -19,7 +19,7 @@ class UserPageTest extends TestCase
     public function ViewUserPageGuest()
     {
         $user = User::find(1);
-        $response = $this->get(route('users.show', ['name' => $user->name]));
+        $response = $this->get(route('users.show', ['user' => $user]));
         $response->assertStatus(200)
             ->assertViewIs('users.show');
     }
@@ -33,7 +33,7 @@ class UserPageTest extends TestCase
     {
         $user = User::find(1);
         $this->actingAs($user)->assertAuthenticated();
-        $response = $this->get(route('users.show', ['name' => $user->name]));
+        $response = $this->get(route('users.show', ['user' => $user]));
         $response->assertStatus(200)
             ->assertViewIs('users.show');
     }
@@ -47,7 +47,7 @@ class UserPageTest extends TestCase
     {
         $user = User::find(1);
         $response = $this->get(route('users.favorites', [
-            'name' => $user->name,
+            'user' => $user,
         ]));
 
         $response->assertOk()

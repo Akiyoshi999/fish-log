@@ -1,13 +1,13 @@
 <div class="container">
   <div class="card mt-3">
     <div class="card-body d-flex flex-row">
-      <a href="{{route('users.show',['name'=>$article->user->name])}}" class="text-dark">
+      <a href="{{route('users.show',['user'=>$article->user])}}" class="text-dark">
         {{-- <i class="fas fa-user-circle fa-3x mr-1"></i> --}}
         <i class="{{ $article->user->icon }} fa-3x mr-1"></i>
       </a>
       <div>
         <div class="font-weight-bold">
-          <a href="{{route('users.show',['name'=>$article->user->name])}}" class="text-dark">
+          <a href="{{route('users.show',['user'=>$article->user])}}" class="text-dark">
             {{ $article->user->name }}
           </a>
         </div>
