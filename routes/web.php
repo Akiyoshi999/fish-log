@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', [ArticleController::class, 'index'])->name('top');
+Route::get('/search', [ArticleController::class, 'search'])->name('search');
 
 Route::resource('/articles', ArticleController::class)
     ->except(['index', 'show'])->middleware('auth');

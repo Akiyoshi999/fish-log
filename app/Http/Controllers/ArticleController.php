@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Tag;
+use ArithmeticError;
+use Doctrine\Inflector\Rules\Word;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -237,14 +240,22 @@ class ArticleController extends Controller
      *
      * @param Request $request
      * @param Article $article
-     * @return void
+     * @return array
      */
-    public function unfavorite(Request $request, Article $article)
+    public function unfavorite(Request $request, Article $article): array
     {
         $article->favorites()->detach($request->user()->id);
 
         return [
             'id' => $article->id,
         ];
+    }
+
+    public function search(Request $request, Article $article): View
+    {
+        $word = $request->all()['word'];
+        $articles = Article::where('comment', 'like', "%$word%")->get()->sortByDesc('created_at');
+
+        return view('articles.index', ['articles' => $articles]);
     }
 }
