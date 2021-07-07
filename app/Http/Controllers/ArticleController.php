@@ -34,8 +34,10 @@ class ArticleController extends Controller
      */
     public function index(): View
     {
-        $articles = Article::all()->sortByDesc('created_at');
-
+        $articles = Article::all()->sortByDesc('created_at')
+            ->load([
+                'user', 'likes', 'favorites', 'tags',
+            ]);
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -179,6 +181,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article): View
     {
+        // $article = $article->load(['user', '']);
         return view('articles.show', ['article' => $article]);
     }
 
@@ -251,10 +254,20 @@ class ArticleController extends Controller
         ];
     }
 
-    public function search(Request $request, Article $article): View
+    /**
+     * 記事検索
+     *
+     * @param Request $request
+     * @return View
+     */
+    public function search(Request $request): View
     {
         $word = $request->all()['word'];
-        $articles = Article::where('comment', 'like', "%$word%")->get()->sortByDesc('created_at');
+        $articles = Article::where('comment', 'like', "%$word%")->get()->sortByDesc('created_at')
+            ->load([
+                // 'user', 'likes', 'favorites', 'tags',
+                'user', 'likes'
+            ]);
 
         return view('articles.index', ['articles' => $articles]);
     }

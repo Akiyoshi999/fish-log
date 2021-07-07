@@ -38,6 +38,14 @@ php artisan migrate
 php artisan make:migration create_articles_table --create=articles
 php artisan
 
+## 頑張ったこと
+
+1. レンダリングが一部のみ必要な箇所は、Vue を使用したこと
+1. CircleCI を利用して、CI/CD の環境を構築し機能を追加したらテストも書く様にしたこと
+1. ファットコントローラーにならないよう気をつけたこと
+1. N+1 問題を意識したこと
+    - [参照](https://beyondco.de/docs/laravel-query-detector/installation)
+
 ## 苦戦したこと
 
 1. public 配下にアップロードした画像が保存されない
