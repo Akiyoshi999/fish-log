@@ -20,7 +20,9 @@ class UserController extends Controller
      */
     public function show(User $user): View
     {
-        // $user = User::where('name', $name)->first();
+        $user = $user->load([
+            'articles.user', 'articles.likes',
+        ]);
         $articles = $user->articles->sortByDesc('created_at');
         return view('users.show', [
             'user' => $user,
@@ -50,7 +52,9 @@ class UserController extends Controller
             logger()->error($e, ['file' => __FUNCTION__, 'line' => __LINE__]);
             abort(500);
         }
-        $articles = $user->articles->sortByDesc('created_at');
+        $articles = $user->articles->load([
+            'user', 'likes',
+        ])->sortByDesc('created_at');
         return view('users.show', [
             'user' => $user,
             'articles' => $articles,
@@ -66,6 +70,7 @@ class UserController extends Controller
      */
     public function favorites(User $user): View
     {
+        $user = $user->load(['favorites.user', 'favorites.likes']);
         $articles = $user->favorites->sortByDesc('created_at');
         return view('users.favorites', [
             'user' => $user,
@@ -81,7 +86,7 @@ class UserController extends Controller
      */
     public function followings(User $user): View
     {
-        // $user = User::where('name', $name)->first();
+        $user = $user->load(['followings.followers']);
         $followings = $user->followings->sortByDesc('created_at');
         return view('users.followings', [
             'user' => $user,
@@ -97,8 +102,8 @@ class UserController extends Controller
      */
     public function followers(User $user): View
     {
-        // $user = User::where('name', $name)->first();
-        $followers = $user->followers->sortByDesc('created_at');
+        $followers = $user->followers
+            ->load(['followers',])->sortByDesc('created_at');
         return view('users.followers', [
             'user' => $user,
             'followers' => $followers
