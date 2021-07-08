@@ -40,12 +40,14 @@ class UserController extends Controller
     public function update(Request $request, User $user): View
     {
         $input = $request->all();
+        foreach ($input as $key => $value) {
+            if (!preg_match("/^_/", $key)) {
+                $user->$key = $value;
+            }
+        }
         DB::beginTransaction();
         try {
-            $user->fill([
-                'name' => $input['name'],
-                'icon' => $input['icon'],
-            ])->save();
+            $user->save();
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollback();

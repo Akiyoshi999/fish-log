@@ -70,6 +70,12 @@ php artisan
     sudo docker-php-ext-configure gd --with-gd --with-jpeg-dir=/usr/lib/
     sudo docker-php-ext-install gd
 
+## 学んだこと
+
+-   ワイヤーフレームを定義した方が、デザインなど迷走せずにすむ。
+-   テストは機能追加時に、作成するのがよいと思った。既存の機能を編集した場合、他の機能に影響がないかすぐに確認できるため
+-   git hub の issue を利用して、タスク管理すると便利
+
 ## 参考記事
 
 ### PHP

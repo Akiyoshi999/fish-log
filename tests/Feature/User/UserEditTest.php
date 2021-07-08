@@ -13,10 +13,11 @@ class UserEditTest extends TestCase
 
     /**
      * ユーザー情報更新テスト
+     * アイコンとユーザー名変更
      *
      * @test
      */
-    public function UserUpdate()
+    public function User_All_Update()
     {
         $user = User::find(1);
         $this->actingAs($user);
@@ -31,6 +32,50 @@ class UserEditTest extends TestCase
         $this->assertDatabaseHas('users', [
             'name' => 'abcdefg',
             'icon' => 'fab fa-android'
+        ]);
+    }
+
+    /**
+     * ユーザー情報更新テスト
+     * ユーザー名変更
+     *
+     * @test
+     */
+    public function User_Username_Update()
+    {
+        $user = User::find(1);
+        $this->actingAs($user);
+
+        $response = $this->put(route('users.update', [
+            'user' => $user,
+            'name' => 'abc',
+        ]));
+
+        $response->assertOk()->assertViewIs('users.show');
+        $this->assertDatabaseHas('users', [
+            'name' => 'abc',
+        ]);
+    }
+
+    /**
+     * ユーザー情報更新テスト
+     * アイコンのみ変更
+     *
+     * @test
+     */
+    public function User_Icon_Update()
+    {
+        $user = User::find(1);
+        $this->actingAs($user);
+
+        $response = $this->put(route('users.update', [
+            'user' => $user,
+            'icon' => 'fas fa-dove'
+        ]));
+
+        $response->assertOk()->assertViewIs('users.show');
+        $this->assertDatabaseHas('users', [
+            'icon' => 'fas fa-dove'
         ]);
     }
 }
