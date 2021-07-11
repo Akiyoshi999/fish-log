@@ -1,70 +1,35 @@
-#
+# READEME
 
-## 使用コマンド
+## 成果物
 
-### 作成系
-
-artisan make:test UserRegisterTest
-
-#### database
-
-php artisan make:seeder UserSeeder
-php artisan make:seeder ArticleSeeder
-php artisan mek:factory ArticleFactory --model=Article
-php artisan migrate:fresh --seed --env=testing
-
-### 起動コマンド
-
-npm run watch
-
-### インストール系
-
-composer require laravel/ui
-php artisan ui bootstrap
-php artisan ui vue --auth
-composer require intervention/image
-npm i --save material-design-icons-iconfont @mdi/font vuetify
-
-### キャッシャクリアコマンド
-
-php artisan cache:clear
-php artisan config:clear
-php artisan route:clear
-php artisan view:clear
-
-### DB 系
-
-php artisan migrate
-php artisan make:migration create_articles_table --create=articles
-php artisan
+https://fish-log.herokuapp.com/
 
 ## 頑張ったこと
 
 1. レンダリングが一部のみ必要な箇所は、Vue を使用したこと
 1. CircleCI を利用して、CI/CD の環境を構築し機能を追加したらテストも書く様にしたこと
 1. ファットコントローラーにならないよう気をつけたこと
-1. N+1 問題を意識したこと
-    - [参照](https://beyondco.de/docs/laravel-query-detector/installation)
+1. N+1 問題を意識したこと[参照](https://beyondco.de/docs/laravel-query-detector/installation)
 
 ## 苦戦したこと
 
 1. public 配下にアップロードした画像が保存されない
 
-    原因
+    原因：
     php artisan storage:link をしていなかった
 
 1. ファイルアップロードのテストで画像が正常に保存されているかの方法がピンとしなかった
 
-    解決方法
+    解決方法：
     テスト時に使用する画像の名前をユニーク(uniqid で)な値をもたせ Storage から全ファイル取得し,preg_grep でマッチするかどうかを確認する。
     マッチした場合は true を返却し、テストすることができた
 
 1. circle CI で PHP-GD の Jpeg Support が有効にならない
 
-    原因
+    原因：
     ライブラリが不足していたことと、php インストール時のオプションに'--with-gd --with-jpeg-dir'がなかった
 
-    解決
+    解決：
     .circleci/config.yml に以下の記載を載せる
     sudo apt-get install -y libjpeg62-turbo-dev libpng-dev
     sudo docker-php-ext-configure gd --with-gd --with-jpeg-dir=/usr/lib/
@@ -137,3 +102,37 @@ php artisan
 [async/await 入門](https://www.codegrid.net/articles/2017-async-await-1)
 
 [キーボードのキーコード](https://javascript.programmer-reference.com/js-list-keycode/)
+
+## 使用コマンド
+
+#### database
+
+php artisan make:seeder UserSeeder
+php artisan make:seeder ArticleSeeder
+php artisan mek:factory ArticleFactory --model=Article
+php artisan migrate:fresh --seed --env=testing
+
+### 起動コマンド
+
+npm run watch
+
+### インストール系
+
+composer require laravel/ui
+php artisan ui bootstrap
+php artisan ui vue --auth
+composer require intervention/image
+npm i --save material-design-icons-iconfont @mdi/font vuetify
+
+### キャッシャクリアコマンド
+
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
+### DB 系
+
+php artisan migrate
+php artisan make:migration create_articles_table --create=articles
+php artisan
