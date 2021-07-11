@@ -130,9 +130,3 @@ php artisan cache:clear
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
-
-### DB 系
-
-php artisan migrate
-php artisan make:migration create_articles_table --create=articles
-php artisan
