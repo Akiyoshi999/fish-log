@@ -5,20 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use App\Models\Tag;
-use ArithmeticError;
-use Doctrine\Inflector\Rules\Word;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use Symfony\Component\Console\Input\Input;
-
-use function PHPSTORM_META\type;
 
 class ArticleController extends Controller
 {
@@ -119,14 +112,14 @@ class ArticleController extends Controller
         DB::beginTransaction();
         try {
             // 記事の画像更新があり、且つ前画像がストレージにある場合削除
-            if (!empty($input['file_name'] && Storage::exists('public/' . $article->file_name))) {
-                Storage::delete('public/' . $article->file_name);
-            }
+            // if (!empty($input['file_name'] && Storage::exists('public/' . $article->file_name))) {
+            //     Storage::delete('public/' . $article->file_name);
+            // }
 
             // 画像更新なしの場合、要素の削除
-            if (empty($input['file_name'])) {
-                unset($input['file_name']);
-            }
+            // if (empty($input['file_name'])) {
+            //     unset($input['file_name']);
+            // }
 
             $article->fill($input)->save();
             $article->tags()->detach();
@@ -181,7 +174,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article): View
     {
-        // $article = $article->load(['user', '']);
+        $article = $article->load([]);
         return view('articles.show', ['article' => $article]);
     }
 
@@ -265,7 +258,6 @@ class ArticleController extends Controller
         $word = $request->all()['word'];
         $articles = Article::where('comment', 'like', "%$word%")->get()->sortByDesc('created_at')
             ->load([
-                // 'user', 'likes', 'favorites', 'tags',
                 'user', 'likes'
             ]);
 

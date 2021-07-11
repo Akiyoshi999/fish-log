@@ -49,14 +49,13 @@ class ArticleFactory extends Factory
             "サヨリ", "イサキ", "ダツ", "シイラ", "マグロ",
         ];
 
-        // $file = UploadedFile::fake()->image('AAA.jpg')->save(storage_path('app/public/uploads/' . uniqid() . '.jpg'));
-        $file = UploadedFile::fake()->image('AAA.jpg');
-        $file_path = Storage::putFile('public/uploads', $file);
-        $file_path = str_replace('public/', '', $file_path);
+        // #27 画像検索機能無効
+        // $file = UploadedFile::fake()->image('AAA.jpg');
+        // $file_path = Storage::putFile('public/uploads', $file);
+        // $file_path = str_replace('public/', '', $file_path);
 
         return [
             // テストデータを作成
-            // 'user_id' => $this->faker->name,
             'title' => $this->faker->text($maxNbChars = 20),
             // 'tag' => json_encode([
             //     [
@@ -76,7 +75,8 @@ class ArticleFactory extends Factory
             'fish' => $this->faker->randomElement($fish),
             'length' => $this->faker->numberBetween($min = 0, $max = 200),
             'comment' => $this->faker->realText($maxNbChars = 50),
-            'file_name' => $file_path,
+            // #27 画像検索機能無効
+            // 'file_name' => $file_path,
         ];
     }
 }

@@ -35,11 +35,12 @@ https://fish-log.herokuapp.com/
     sudo docker-php-ext-configure gd --with-gd --with-jpeg-dir=/usr/lib/
     sudo docker-php-ext-install gd
 
-## 学んだこと
+## 学んだこと&反省点
 
 -   ワイヤーフレームを定義した方が、デザインなど迷走せずにすむ。
 -   テストは機能追加時に、作成するのがよいと思った。既存の機能を編集した場合、他の機能に影響がないかすぐに確認できるため
 -   git hub の issue を利用して、タスク管理すると便利
+-   heroku に画像アップロード・画像表示処理を実装した掲示板をデプロイする予定だったが、heroku の無料枠の DB のストレージ容量が思った以上に低く(5MB)画像機能の実装を断念することとなった。あらかじめ調査しておおけばよかった。
 
 ## 参考記事
 

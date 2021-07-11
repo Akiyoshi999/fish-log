@@ -72,7 +72,8 @@ class ArticleRequest extends FormRequest
         if (is_null($data['comment'])) {
             $data['comment'] = '';
         }
-        $data = $this->imgCheck($data);
+        // #27画像検索機能無効
+        // $data = $this->imgCheck($data);
 
         return $data;
     }
