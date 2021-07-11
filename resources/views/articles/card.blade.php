@@ -1,17 +1,7 @@
 <div class="container">
   <div class="card mt-3">
     <div class="card-body d-flex flex-row no-gutters">
-      <div class="col-md-4">
-        @if (!empty($article->file_name))
-        <img class="rounded bor" height="200" width="200" src="{{Storage::url($article->file_name)}}" alt=""
-          style="border: 1px solid #c7cacc">
-        @else
-        <img class="rounded bor" height="200" width="200"
-          src="https://1.bp.blogspot.com/-D2I7Z7-HLGU/Xlyf7OYUi8I/AAAAAAABXq4/jZ0035aDGiE5dP3WiYhlSqhhMgGy8p7zACNcBGAsYHQ/s400/no_image_square.jpg"
-          alt="" style="border: 1px solid #c7cacc">
-        @endif
-      </div>
-      <div class="col-md-8 ">
+      <div class="col-md-12">
         <div class="card-body">
           <div class="row">
             <div class="col-md-11">

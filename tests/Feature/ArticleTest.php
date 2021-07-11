@@ -85,8 +85,8 @@ class ArticleRegister extends TestCase
 
     /**
      * 記事が正常に投稿できるか
+     * #27 画像検索機能無効化
      *
-     * @test
      */
     public function CreateArticleImage()
     {
@@ -187,8 +187,8 @@ class ArticleRegister extends TestCase
     /**
      * 記事削除テスト
      * ストレージの画像が削除されていることを確認
+     * #27 画像処理無効
      *
-     * @test
      */
     public function DeleteArticleImage()
     {

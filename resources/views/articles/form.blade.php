@@ -82,7 +82,8 @@ $fishs = $info['fish'];
   </textarea>
   </div>
   <div class="form-group">
-    <!-- 画像表示の機能無効 -->
+    <!-- 画像表示の機能無効 
     <preview-image>
+    -->
   </div>
 </div>

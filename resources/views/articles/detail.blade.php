@@ -91,9 +91,10 @@
       {{ $article->comment}}
     </div>
   </div>
+  <!-- 画像表示処理　無効
   <div class="card-body">
     <img class="rounded" src="{{Storage::url($article->file_name)}}" alt="">
-  </div>
+  </div> -->
   <div class=" card-body pt-0 pb-2 pl-3">
     <div class="card-text">
       <article-like :initial-is-liked-by='@json($article->isLikedBy(Auth::user()))'
@@ -150,29 +151,6 @@
   </div>
 </form>
 @endauth
-
-{{-- <form method="POST"
-  action="{{ route('articles.comment.update',['article'=>$article,'comment'=>$article->comments->first()]) }}">
-@csrf
-@method('PUT')
-<div class="bg-light p-2">
-  <div class="d-flex flex-row align-items-start">
-    <i class="{{ $article->user->icon }} fa-2x mr-2"></i>
-    <h5>{{ Auth::user()->name }} </h5>
-  </div>
-  <div class="pl-2 pt-2">
-    <textarea name="content" class="form-control ml-1 shadow-none textarea">
-        {{$article->comments->first()->content}}
-    </textarea>
-  </div>
-  <div class="mt-2 text-right">
-    <button class="btn btn-primary btn-sm shadow-none" type="submit">
-      Post comment
-    </button>
-    <button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button>
-  </div>
-</div>
-</form> --}}
 
 @if ($errors->any())
 <div class="card-text text-left alert alert-danger">
