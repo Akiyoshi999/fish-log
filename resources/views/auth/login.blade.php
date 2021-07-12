@@ -69,8 +69,8 @@
 								@endif
 							</div>
 							<div class="col-md-8 offset-md-3 ">
-								<a class="text-dark btn-link" style="font-size: 0.8rem; text-align: center;" href="{{route('login')}}">
-									{{-- <a class="btn btn-link" href="{{ route('register') }}"> --}}
+								<a class="text-dark btn-link" style="font-size: 0.8rem; text-align: center;"
+									href="{{route('register')}}">
 									アカウントをお持ちでない方はこちらから新規登録
 								</a>
 							</div>

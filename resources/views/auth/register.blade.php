@@ -67,14 +67,16 @@
               </div>
             </div>
 
-            <div class="col-md-8 offset-md-3">
-              <a style="font-size: 0.8rem; text-align: center;" href="{{route('login')}}">アカウントをお持ちの方はこちらから</a>
-            </div>
 
             <div class="col-md-8 offset-md-4">
               <button type="submit" class="btn btn-primary">
                 {{ __('Register') }}
               </button>
+            </div>
+
+            <div class="col-md-8 offset-md-3 mt-3">
+              <a class="text-dark btn-link" style="font-size: 0.8rem; text-align: center;"
+                href="{{route('login')}}">アカウントをお持ちの方はこちらから</a>
             </div>
         </div>
         </form>
